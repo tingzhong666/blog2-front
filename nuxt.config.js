@@ -31,6 +31,10 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css'
   ],
+  styleResources: {
+    // your settings here
+    stylus: ['@/assets/var.styl']
+   },
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
@@ -52,6 +56,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/style-resources'
   ],
   /*
   ** Build configuration
