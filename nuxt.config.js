@@ -29,7 +29,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '@/static/css/base.css'
   ],
   styleResources: {
     // your settings here
@@ -64,5 +65,16 @@ export default {
   */
   build: {
     transpile: [/^element-ui/],
+    babel: {
+      plugins: [
+        [
+          'component',
+          {
+            libraryName: 'element-ui',
+            styleLibraryName: 'theme-chalk'
+          }
+        ]
+      ]
+    }
   }
 }
