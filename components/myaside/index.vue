@@ -1,12 +1,17 @@
 <template>
   <aside id="aside">
-    <close class="close"></close>
+    <close class="close" @closeEnd="colse"></close>
   </aside>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    // 关闭按钮 关闭动画结束
+    colse () {
+      this.$emit('closeEnd')
+    }
+  }
 }
 </script>
 

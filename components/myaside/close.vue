@@ -1,9 +1,8 @@
 <template>
-  <section class="component" @click="start">
-    <div class="big" :class="{ 'big-close': bigClose, closed }" @animationend="shut"></div>
+  <section class="component" @click="closed = true">
+    <div class="big" :class="{ closed }"></div>
 
-    <div class="small" :class="{ 'small-close': smallClose, closed }" @animationend="shut"></div>
-
+    <div class="small" :class="{ closed }" @transitionend="closeEnd"></div>
     <div class="dot"></div>
   </section>
 </template>
@@ -12,21 +11,13 @@
 export default {
   data () {
     return {
-      bigClose: false,
-      smallClose: false,
       closed: false
     }
   },
   methods: {
-    start () {
-      this.bigClose = true
-      this.smallClose = true
-      this.closed = false
-    },
-    shut () {
-      this.bigClose = false
-      this.smallClose = false
-      this.closed = true
+    // 关闭动画结束
+    closeEnd () {
+      this.$emit('closeEnd')
     }
   }
 }
@@ -36,26 +27,6 @@ export default {
 line-width = 4px
 close-width = 15px
 close-height = 25px
-
-@keyframes big-close
-  0%
-    border-left-width close-width
-    height 3px
-  100%
-    border-width 0
-    border-left-width line-width
-    height close-height
-    border-radius 0
-@keyframes small-close
-  0%
-    border-left-width (close-width - line-width + 1px)
-  100%
-    border-left-width 0px
-
-.big-close
-  animation big-close .5s ease
-.small-close
-  animation small-close .5s ease
 
 .component
   width close-width
@@ -74,6 +45,7 @@ close-height = 25px
     top 0
     border (close-height / 2 - 1.5px) solid aside-bgc
     border-left close-width solid theme-contrary
+    transition all .3s ease
     &.closed
       border-width 0
       border-left-width line-width
@@ -85,6 +57,7 @@ close-height = 25px
     top line-width
     border (close-height / 2 - line-width) solid transparent
     border-left (close-width - line-width + 1px) solid aside-bgc
+    transition all .3s ease
     &.closed
-      display none
+      border-left-width 0px
 </style>>
