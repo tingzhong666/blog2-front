@@ -1,6 +1,6 @@
 <template>
   <aside id="aside">
-    <close class="close" @closeEnd="colse"></close>
+    <close class="close" @closeEnd="colse" ref="close"></close>
   </aside>
 </template>
 
@@ -10,6 +10,10 @@ export default {
     // 关闭按钮 关闭动画结束
     colse () {
       this.$emit('closeEnd')
+    },
+    // 按钮 打开动画
+    open () {
+      this.$refs.close.open()
     }
   }
 }

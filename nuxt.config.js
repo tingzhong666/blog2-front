@@ -30,11 +30,12 @@ export default {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    '@/static/css/base.css'
+    '@/assets/base.css',
+    '@/assets/font/iconfont.css'
   ],
   styleResources: {
     // your settings here
-    stylus: ['@/assets/var.styl']
+    stylus: ['@/assets/*.styl']
    },
   /*
   ** Plugins to load before mounting the App

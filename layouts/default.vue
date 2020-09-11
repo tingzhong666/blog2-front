@@ -2,9 +2,9 @@
   <section id="layout">
 
     <!-- 左边主体 -->
-    <main class="main" :class="{ close }">
+    <main class="main" :class="{ close }" @transitionend="shutEnd">
       <!-- 头部栏 -->
-      <myheader class="header"></myheader>
+      <myheader class="header" ref="header" :show-init="menuShowInit" @open="open"></myheader>
 
       <!-- 页面 -->
       <section class="content">
@@ -16,35 +16,77 @@
     </main>
 
     <!-- 右边 侧边栏 -->
-    <myaside class="aside" :class="{ close }" @closeEnd="close = true">
+    <myaside class="aside" :class="{ close }" @closeEnd="shut" ref="aside">
     </myaside>
   </section>
 </template>
 
 <script>
+import api from '@/http/api.js'
+
 export default {
   data () {
     return {
-      close: false
+      close: false,
+      menuShowInit: false
     }
   },
   methods: {
+    // 关闭菜单
+    shut () {
+      this.close = true
+    },
+    // 动画结束
+    shutEnd (e) {
+      // 此时关闭侧边栏结束
+      if (e.propertyName == 'width' && this.close === true) {
+        // 显示按钮
+        this.$refs.header.shut()
+      }
+
+      // 此时打开侧边栏动画结束
+      if (e.propertyName == 'width' && this.close === false) {
+        // 显示按钮
+        this.$refs.aside.open()
+      }
+    },
+    // 打开菜单
+    open () {
+      this.close = false
+    }
+  },
+  async created () {
+    if (!process.client) return
   }
 }
 </script>
 
 <style lang="stylus">
-header-h = 60px
-footer-h = 60px
-aside-w = 300px
-
 // 容器
 .container
   max-width container-width
   margin 0 auto
-  @media screen and (max-width container-width + 100px) {
-    padding 0 3vw
+  padding padd-col 0
+  position relative
+  @media screen and (max-width 1400px) {
+    max-width 1400px - aside-w - 200px
   }
+  @media screen and (max-width 1300px) {
+    max-width 1400px - aside-w - 300px
+  }
+  @media screen and (max-width 1200px) {
+    max-width 1400px - aside-w - 400px
+  }
+  @media screen and (max-width 1100px) {
+    max-width 1400px - aside-w - 450px
+  }
+  @media screen and (max-width 960px) {
+    padding padd-col padd-row
+  }
+
+.iconfont
+  color theme-c
+  font-size icon-size
 
 #layout >
   .aside
@@ -53,18 +95,19 @@ aside-w = 300px
     top 0
     width aside-w
     height 100vh
-    transition width 0.3s ease
+    transition width anima-time ease
     &.close
       width 0
   .main
     --aside-w aside-w
-    width calc(100vw - --aside-w)
-    transition width 0.3s ease
+    width calc(100vw - var(--aside-w))
+    transition width anima-time ease
     &.close
       width 100vw
     >
       .header
         height header-h
+        line-height header-h
       .content
         background-color bgc
         --header-h header-h

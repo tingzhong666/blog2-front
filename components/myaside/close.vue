@@ -15,9 +15,16 @@ export default {
     }
   },
   methods: {
-    // 关闭动画结束
-    closeEnd () {
-      this.$emit('closeEnd')
+    // 动画结束
+    closeEnd (e) {
+      // 此时 关闭 侧边栏 按钮 动画结束
+      if (this.closed === true) {
+        this.$emit('closeEnd')
+      }
+    },
+    // 打开按钮
+    open () {
+      this.closed = false
     }
   }
 }
@@ -45,7 +52,7 @@ close-height = 25px
     top 0
     border (close-height / 2 - 1.5px) solid aside-bgc
     border-left close-width solid theme-contrary
-    transition all .3s ease
+    transition border .3s ease,height .3s ease
     &.closed
       border-width 0
       border-left-width line-width
@@ -57,7 +64,7 @@ close-height = 25px
     top line-width
     border (close-height / 2 - line-width) solid transparent
     border-left (close-width - line-width + 1px) solid aside-bgc
-    transition all .3s ease
+    transition border .3s ease
     &.closed
       border-left-width 0px
 </style>>
