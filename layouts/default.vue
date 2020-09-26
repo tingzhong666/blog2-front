@@ -95,9 +95,12 @@ export default {
     top 0
     width aside-w
     height 100vh
-    transition width anima-time ease
+    transition anima-time ease
+    transition-property width, padding
+    overflow auto
     &.close
       width 0
+      padding 0
   .main
     --aside-w aside-w
     width calc(100vw - var(--aside-w))

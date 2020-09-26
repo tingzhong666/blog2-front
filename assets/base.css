@@ -3,6 +3,12 @@
   font-size: calc(1vw + 1px);
 }
 
+/* 字体选中 */
+::selection {
+  background-color: #000;
+  color: #fff;
+}
+
 body {	/*内外边距初始化*/
 	margin: 0;
 	padding: 0;
