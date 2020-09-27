@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'http://www.tingzhong666.top:30003',
+  baseURL: 'http://www.tingzhong666.top:30003/api',
   timeout: 1000
 })
 
