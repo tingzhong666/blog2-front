@@ -3,6 +3,18 @@
   font-size: calc(1vw + 1px);
 }
 
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+}
+
 /* 字体选中 */
 ::selection {
   background-color: #000;

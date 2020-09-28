@@ -4,6 +4,9 @@
       <div class="menu" @click="open" :class="{ show }" @transitionend="openend">
         <span class="icon-caidan iconfont"></span>
       </div>
+
+      <!-- logo -->
+      <router-link class="logo" to="/">TingZhong666</router-link>
     </div>
   </header>
 </template>
@@ -28,15 +31,22 @@ export default {
     },
     // 按钮显示隐藏动画结束
     openend (e) {
-      // 若按钮消失 则打开侧边栏
+      // 若按钮消失 则准备侧边栏
       if (e.propertyName == 'opacity' && this.show === false) {
         this.$emit('open')
+        return
       }
+
+      // 按钮显示 表示已经关闭侧边栏
+      this.$store.commit('setMenu', false)
     },
     // 关闭菜单
     shut () {
       this.show = true
     }
+  },
+  async mounted () {
+    this.$store.commit('setMenuOpen', this.open)
   }
 }
 </script>
@@ -48,6 +58,8 @@ change-size = 3px
   background-color header-bgc
   > .container
     height header-h
+    display flex
+    align-items center
     >
       .menu
         position absolute
@@ -74,4 +86,22 @@ change-size = 3px
           transform scale(0.8)
         &.show
           opacity 1
+    .logo
+      display inline-block
+      font-weight 600
+      color theme-c
+      font-size 1.5rem
+      position relative
+      &::before
+        content ''
+        width 0
+        height 3px
+        background-color theme-c
+        position absolute
+        left 50%
+        bottom 0
+        transition all anima-time ease        
+      &:hover::before
+        width 110%
+        left -5%
 </style>

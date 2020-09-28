@@ -17,10 +17,14 @@ export default {
   methods: {
     // 动画结束
     closeEnd (e) {
-      // 此时 关闭 侧边栏 按钮 动画结束
+      // 此时 关闭 侧边栏 按钮 动画结束.   侧边栏关闭中。  按钮 变为一条竖线线
       if (this.closed === true) {
         this.$emit('closeEnd')
+        return
       }
+      // 竖线变为 > 表示侧边栏已经打开
+      this.$store.commit('setMenu', true)
+
     },
     // 打开按钮
     open () {

@@ -4,17 +4,27 @@ export default {
   state () {
     return {
       isLogin: null,
-      token: null
+      token: null,
+      // 侧边栏 打开函数
+      menuOpen: true,
+      // 侧边栏状态
+      menu: true
     }
   },
   getters: {
   },
   mutations: {
-    setToken (state, token) {
-      state.token = token
+    setToken (state, v) {
+      state.token = v
     },
-    setIsLogin (state, isLogin) {
-      state.isLogin = isLogin
+    setIsLogin (state, v) {
+      state.isLogin = v
+    },
+    setMenuOpen (state, v) {
+      state.menuOpen = v
+    },
+    setMenu (state, v) {
+      state.menu = v
     }
   },
   actions: {

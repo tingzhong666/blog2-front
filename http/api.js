@@ -29,5 +29,9 @@ export default {
     if (q) params.q = q
     else params.tag = tag
     return await http.get('/list', { params })
+  },
+  // 文章详情
+  async details (id) {
+    return await http.get('/artical_details', { params: { id } })
   }
 }

@@ -3,7 +3,7 @@
     <el-card class="item" v-for="v in list" :key="v.id">
       <!-- 标题 -->
       <div class="item title">
-        <a :href="'/details/' + v.id" v-text="v.title"></a>
+        <a :href="'/details/' + v.id" v-text="v.title" target="_blank"></a>
       </div>
 
       <!-- 日期 浏览量 -->
@@ -33,7 +33,7 @@
 
       <!-- 进入 -->
       <div class="item btn">
-        <a :href="'/details/' + v.id">阅读全文>>></a>
+        <a :href="'/details/' + v.id" target="_blank">阅读全文>>></a>
       </div>
 
       <!-- 横线 -->
@@ -130,6 +130,8 @@ export default {
         &:hover::before
           width 100%
           left 0
+        &::selection
+          background-color theme-contrary
     .intro
       padding 10px
       color index-intro
