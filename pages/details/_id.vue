@@ -1,5 +1,5 @@
 <template>
-  <div class='component'>
+  <div class='page'>
     <div class="container">
       <!-- 标题 -->
       <div class="item title">
@@ -32,15 +32,25 @@
       <div class="item intro" v-text="intro"></div>
 
       <!-- 内容 -->
-      <!-- <vue-markdown>{{content}}</vue-markdown> -->
+      <div class="item md" v-html="$marked(content)"></div>
+
+      <!-- 赞赏 -->
+      <Reward v-if="$store.state.set.is_reward && is_reward"/>
+
+      <!-- 评论 -->
+      <Comment class="comment"/>
     </div>
   </div>
 </template>
 
 <script>
 import api from '@/http/api'
+import '@/assets/md/md.styl'
+import Reward from '@/pages/details/reward'
+import Comment from '@/pages/details/comment'
 
 export default {
+  components: { Reward, Comment },
   data () {
     return {
       id: '',
@@ -50,10 +60,13 @@ export default {
       readed: 0,
       tag: [],
       intro: '',
-      content: ''
+      content: '',
+      // 此文章赞赏开关
+      is_reward: false
     }
   },
   methods: {
+    // 文章详情
     async getDetails () {
       const res = await api.details(this.$route.params.id)
       this.id = res.data.id
@@ -64,6 +77,7 @@ export default {
       this.tag = res.data.tag
       this.intro = res.data.intro
       this.content = res.data.content
+      this.is_reward = res.data.is_reward
     },
     time (v) {
       const date = new Date(v)
@@ -84,7 +98,7 @@ export default {
 </script>
 
 <style lang='stylus' scoped>
-.component
+.page
   padding 40px 0
   .container
     box-shadow 0 0 10px 0 rgba(0, 0, 0, .3)
@@ -112,4 +126,11 @@ export default {
       font-size .7rem
       .iconfont
         font-size .7rem
+    .md
+      text-align left
+      >>> img
+        width 100%
+    .comment
+      border-top 1px solid br
+      margin-top 20px
 </style>

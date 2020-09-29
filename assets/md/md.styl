@@ -1,0 +1,37 @@
+@import './code.css'
+
+// base.css 中清除了默认样式 这里还原
+.md
+  ul
+    list-style disc
+    > li > ul
+      list-style circle
+      > li > ul
+        list-style square
+// 行内 code
+code
+  background-color #fff5f5
+  color #ff502c
+  font-family Consolas, "Courier", monospace
+  padding .065em .4em
+  font-size .87em
+  border-radius 2px
+// 一段 code
+pre
+  background-color #f8f8f8
+  padding 18px 15px 12px
+  code
+    color #333
+    background #f8f8f8
+    line-height 1.5rem
+    padding 0
+    border-radius 0
+    font-size 1rem
+// 脚注
+blockquote
+  border-left 4px solid #000
+  color #666
+  background-color #f8f8f8
+  margin 0
+  padding 1px 15px
+  line-height 1.5rem

@@ -42,7 +42,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/marked'
   ],
   /*
   ** Auto import components

@@ -34,6 +34,7 @@
 
 <script>
 import api from '@/http/api.js'
+import '@/assets/global.styl'
 
 export default {
   data () {
@@ -76,50 +77,29 @@ export default {
     },
     menuOpen () {
       this.$store.state.menuOpen()
+    },
+    // 滚动监听 显隐按钮 返回顶部定时器移除
+    scrollListen () {
+        window.addEventListener('scroll', e => {
+        if (this.comeTopId !== null && document.documentElement.scrollTop === 0) {
+          window.clearInterval(this.comeTopId)
+          this.comeTopId = null
+        }
+
+        if (document.documentElement.scrollTop > 300) this.topShow = true
+        else this.topShow = false
+      }, false)
     }
   },
   async created () {
     if (!process.client) return
-    window.addEventListener('scroll', e => {
-      if (this.comeTopId !== null && document.documentElement.scrollTop === 0) {
-        window.clearInterval(this.comeTopId)
-        this.comeTopId = null
-      }
-
-      if (document.documentElement.scrollTop > 300) this.topShow = true
-      else this.topShow = false
-    }, false)
+    this.scrollListen()
+    this.$store.dispatch('setGet')
   }
 }
 </script>
 
 <style lang="stylus">
-// 容器
-.container
-  max-width container-width
-  margin 0 auto
-  padding padd-col 0
-  position relative
-  @media screen and (max-width 1400px) {
-    max-width 1400px - aside-w - 200px
-  }
-  @media screen and (max-width 1300px) {
-    max-width 1400px - aside-w - 300px
-  }
-  @media screen and (max-width 1200px) {
-    max-width 1400px - aside-w - 400px
-  }
-  @media screen and (max-width 1100px) {
-    max-width 1400px - aside-w - 450px
-  }
-  @media screen and (max-width 960px) {
-    padding padd-col padd-row
-  }
-
-.iconfont
-  color theme-c
-  font-size icon-size
-
 #layout
   >
     .aside

@@ -8,7 +8,17 @@ export default {
       // 侧边栏 打开函数
       menuOpen: true,
       // 侧边栏状态
-      menu: true
+      menu: true,
+      // 基本设置
+      set: {
+        foot: '',
+        is_reward: false,
+        reward: {
+          alipay: '',
+          wx: '',
+          qq: ''
+        }
+      }
     }
   },
   getters: {
@@ -25,6 +35,22 @@ export default {
     },
     setMenu (state, v) {
       state.menu = v
+    },
+    // 基本设置
+    setSetFoot (state, v) {
+      state.set.foot = v
+    },
+    setSetIsReward (state, v) {
+      state.set.is_reward = v
+    },
+    setSetRewardAlipay (state, v) {
+      state.set.reward.alipay = v
+    },
+    setSetRewardWx (state, v) {
+      state.set.reward.wx = v
+    },
+    setSetRewardQq (state, v) {
+      state.set.reward.qq = v
     }
   },
   actions: {
@@ -48,6 +74,15 @@ export default {
         store.commit('setToken', token)
         store.commit('setIsLogin', true)
       }
+    },
+    // 基本设置获取
+    async setGet (store) {
+      const res = await api.set()
+      store.commit('setSetFoot', res.data.foot)
+      store.commit('setSetIsReward', res.data.is_reward)
+      store.commit('setSetRewardAlipay', res.data.reward.alipay)
+      store.commit('setSetRewardWx', res.data.reward.wx)
+      store.commit('setSetRewardQq', res.data.reward.qq)
     }
   },
   modules: {

@@ -33,5 +33,9 @@ export default {
   // 文章详情
   async details (id) {
     return await http.get('/artical_details', { params: { id } })
+  },
+  // 基本设置获取
+  async set () {
+    return await http.get('/set')
   }
 }
