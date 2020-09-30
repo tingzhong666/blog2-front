@@ -37,5 +37,30 @@ export default {
   // 基本设置获取
   async set () {
     return await http.get('/set')
+  },
+  // 评论
+  comment: {
+    async add ({
+      name,
+      contact = '',
+      email = '',
+      content,
+      comment_id = null,
+      reply_id = null,
+      id
+    }) {
+      return await http.post('/comment_add', {
+        name,
+        contact,
+        email,
+        content,
+        comment_id,
+        reply_id,
+        id
+      })
+    },
+    async get ({ id, page = 1, limit = 10 }) {
+      return await http.get('/comment', { params: { id, page, limit } })
+    }
   }
 }

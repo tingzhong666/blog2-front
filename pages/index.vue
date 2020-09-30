@@ -56,6 +56,7 @@
 <script>
 import api from '@/http/api'
 import Tag from '@/components/tag'
+import time from '@/utils/time'
 
 export default {
   components: { Tag },
@@ -73,14 +74,7 @@ export default {
     async get () {
       const res = await api.list(this.option)
       this.list = res.data.map(v => {
-        const date = new Date(v.created_time)
-        const y = date.getFullYear()
-        const m = date.getMonth() + 1
-        const d = date.getDate()
-        const h = date.getHours()
-        const min = date.getMinutes()
-        v.created_time = y + '.' + m + '.' + d + ' ' + h + ':' + min
-
+        v.created_time = time(v.created_time, 2)
         return v
       })
       this.n = res.count

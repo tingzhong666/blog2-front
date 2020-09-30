@@ -5,10 +5,12 @@ const http = axios.create({
   timeout: 1000
 })
 
+// 响应
 http.interceptors.response.use(config => {
-  if (config.status === 200) return config.data
+  if (config.status !== 200) console.error('状态码不为200--------', config)
+  if (config.data.code !== 1) console.error('code不为1', config.data)
   
-  console.error('状态码不为200--------', config)
+  return config.data
 }, err => Promise.reject(err))
 
 export default http

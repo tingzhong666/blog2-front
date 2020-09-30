@@ -32,7 +32,7 @@
       <div class="item intro" v-text="intro"></div>
 
       <!-- 内容 -->
-      <div class="item md" v-html="$marked(content)"></div>
+      <div class="item md" v-html="md"></div>
 
       <!-- 赞赏 -->
       <Reward v-if="$store.state.set.is_reward && is_reward"/>
@@ -50,6 +50,11 @@ import Reward from '@/pages/details/reward'
 import Comment from '@/pages/details/comment'
 
 export default {
+  head () {
+    return {
+      title: this.title + '- TZ2博客'
+    }
+  },
   components: { Reward, Comment },
   data () {
     return {
@@ -65,10 +70,18 @@ export default {
       is_reward: false
     }
   },
+  computed: {
+    md () {
+      return this.$marked(this.content)
+    }
+  },
   methods: {
+    outline () {
+    },
     // 文章详情
     async getDetails () {
       const res = await api.details(this.$route.params.id)
+      this.content = res.data.content
       this.id = res.data.id
       this.title = res.data.title
       this.created_time = this.time(res.data.created_time)
@@ -76,8 +89,9 @@ export default {
       this.readed = res.data.readed
       this.tag = res.data.tag
       this.intro = res.data.intro
-      this.content = res.data.content
       this.is_reward = res.data.is_reward
+
+      this.outline()
     },
     time (v) {
       const date = new Date(v)

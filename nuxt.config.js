@@ -35,7 +35,7 @@ export default {
   ],
   styleResources: {
     // your settings here
-    stylus: ['@/assets/*.styl']
+    stylus: ['@/assets/var.styl', '@/assets/layout.styl']
    },
   /*
   ** Plugins to load before mounting the App
