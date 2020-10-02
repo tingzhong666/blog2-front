@@ -35,16 +35,16 @@
 <script>
 import api from '@/http/api.js'
 import '@/assets/global.styl'
-
+import scroll from '@/mixins/scroll'
 export default {
   data () {
     return {
       close: false,
       menuShowInit: false,
-      topShow: false,
-      comeTopId: null
+      topShow: false
     }
   },
+  mixins: [scroll],
   methods: {
     // 关闭菜单
     shut () {
@@ -69,22 +69,16 @@ export default {
       this.close = false
     },
     comeTop () {
-      if (this.comeTopId !== null) return
-      this. comeTopId = window.setInterval(() => {
-        document.documentElement.scrollTop = document.documentElement.scrollTop * 0.9
-        if (document.documentElement.scrollTop < 10) document.documentElement.scrollTop = 0
-      }, 10)
+      // mixins 方法
+      this.mixinScrollCome(0)
     },
     menuOpen () {
       this.$store.state.menuOpen()
     },
-    // 滚动监听 显隐按钮 返回顶部定时器移除
+    // 滚动监听 显隐按钮
     scrollListen () {
-        window.addEventListener('scroll', e => {
-        if (this.comeTopId !== null && document.documentElement.scrollTop === 0) {
-          window.clearInterval(this.comeTopId)
-          this.comeTopId = null
-        }
+      window.addEventListener('scroll', e => {
+        this.$store.commit('setScrollTop', document.documentElement.scrollTop)
 
         if (document.documentElement.scrollTop > 300) this.topShow = true
         else this.topShow = false
@@ -94,7 +88,7 @@ export default {
   async created () {
     if (!process.client) return
     this.scrollListen()
-    this.$store.dispatch('setGet')
+    this.$store.dispatch('init')
   }
 }
 </script>

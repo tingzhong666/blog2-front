@@ -32,7 +32,7 @@
       <div class="item intro" v-text="intro"></div>
 
       <!-- 内容 -->
-      <div class="item md" v-html="md"></div>
+      <Md class="item md" :content="content" mode="md"/>
 
       <!-- 赞赏 -->
       <Reward v-if="$store.state.set.is_reward && is_reward"/>
@@ -45,9 +45,10 @@
 
 <script>
 import api from '@/http/api'
-import '@/assets/md/md.styl'
 import Reward from '@/pages/details/reward'
 import Comment from '@/pages/details/comment'
+import Md from '@/components/md'
+import time from '@/utils/time'
 
 export default {
   head () {
@@ -55,7 +56,7 @@ export default {
       title: this.title + '- TZ2博客'
     }
   },
-  components: { Reward, Comment },
+  components: { Reward, Comment, Md },
   data () {
     return {
       id: '',
@@ -70,39 +71,19 @@ export default {
       is_reward: false
     }
   },
-  computed: {
-    md () {
-      return this.$marked(this.content)
-    }
-  },
   methods: {
-    outline () {
-    },
     // 文章详情
     async getDetails () {
       const res = await api.details(this.$route.params.id)
       this.content = res.data.content
       this.id = res.data.id
       this.title = res.data.title
-      this.created_time = this.time(res.data.created_time)
-      this.modify_time = this.time(res.data.modify_time)
+      this.created_time = time(res.data.created_time, 2)
+      this.modify_time = time(res.data.modify_time, 2)
       this.readed = res.data.readed
       this.tag = res.data.tag
       this.intro = res.data.intro
       this.is_reward = res.data.is_reward
-
-      this.outline()
-    },
-    time (v) {
-      const date = new Date(v)
-      const y = date.getFullYear()
-      const m = date.getMonth() + 1
-      const d = date.getDate()
-      const h = date.getHours()
-      const min = date.getMinutes()
-      v = y + '.' + m + '.' + d + ' ' + h + ':' + min
-
-      return v
     }
   },
   async created () {
@@ -140,10 +121,6 @@ export default {
       font-size .7rem
       .iconfont
         font-size .7rem
-    .md
-      text-align left
-      >>> img
-        width 100%
     .comment
       border-top 1px solid br
       margin-top 20px

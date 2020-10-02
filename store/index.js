@@ -18,7 +18,20 @@ export default {
           wx: '',
           qq: ''
         }
-      }
+      },
+      // 文章大纲
+      outline: null,
+      // 博主信息
+      infor: {
+        img: '',
+        name: '',
+        intro: '',
+        github: ''
+      },
+      // 是否正在滚动中
+      scrolling: false,
+      // 当前 scrolltop
+      scrollTop: null
     }
   },
   getters: {
@@ -51,15 +64,49 @@ export default {
     },
     setSetRewardQq (state, v) {
       state.set.reward.qq = v
+    },
+    // 文章大纲
+    setOutline (state, v) {
+      state.outline = v
+    },
+    // 博主信息
+    setInforName (state, v) {
+      state.infor.name = v
+    },
+    setInforImg (state, v) {
+      state.infor.img = v
+    },
+    setInforIntro (state, v) {
+      state.infor.intro = v
+    },
+    setInforGithub (state, v) {
+      state.infor.github = v
+    },
+    // 正在滚动
+    setScrolling (state, v) {
+      state.scrolling = v
+    },
+    // 当前 scrolltop
+    setScrollTop (state, v) {
+      state.scrollTop = v
     }
   },
   actions: {
+    async init (store) {
+      await Promise.allSettled([
+        store.dispatch('auth'),
+        store.dispatch('setGet'),
+        store.dispatch('inforGet')
+      ])
+    },
+    // 管理员验证
     async auth (store) {
       const token = await localStorage.getItem('token')
       // 没有 token
-      if (token === null) {
+      if (!token) {
         store.commit('setToken', null)
         store.commit('setIsLogin', false)
+        return
       }
 
       // 验证
@@ -83,6 +130,14 @@ export default {
       store.commit('setSetRewardAlipay', res.data.reward.alipay)
       store.commit('setSetRewardWx', res.data.reward.wx)
       store.commit('setSetRewardQq', res.data.reward.qq)
+    },
+    // 博主信息获取
+    async inforGet (store) {
+      const res = await api.intro()
+      store.commit('setInforName', res.data.name)
+      store.commit('setInforImg', res.data.img)
+      store.commit('setInforIntro', res.data.intro)
+      store.commit('setInforGithub', res.data.github)
     }
   },
   modules: {

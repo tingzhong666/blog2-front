@@ -16,4 +16,13 @@ marked.setOptions({
   smartypants: false,
   xhtml: false
 })
+
+marked.use({
+  renderer: {
+    heading(text, level) {
+      return `<h${level} id="${text}" class="md-title">${text}</h${level}>`;
+    }
+  }
+})
+
 Vue.prototype.$marked = marked

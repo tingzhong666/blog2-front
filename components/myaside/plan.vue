@@ -3,17 +3,17 @@
     <!-- 个人信息 -->
     <div class="infor">
       <!-- 头像 -->
-      <img class="img item" :src="img"/>
+      <img class="img item" :src="infor.img" v-show="infor.img"/>
 
       <!-- 昵称 -->
-      <div class="name item" v-text="name"></div>
+      <div class="name item" v-text="infor.name"></div>
 
       <!-- 简介 -->
-      <div class="intro item" v-text="intro"></div>
+      <div class="intro item" v-text="infor.intro"></div>
 
       <!-- github -->
       <div class="github item">
-        <a class="btn" :href="github" target="_blank">
+        <a class="btn" :href="infor.github" target="_blank">
           <span class="icon-github iconfont"></span>
           github
         </a>
@@ -56,26 +56,11 @@
 
 <script>
 import api from '@/http/api'
+import { mapState } from 'vuex'
+
 export default {
-  data () {
-    return {
-      img: '',
-      name: '',
-      intro: '',
-      github: ''
-    }
-  },
-  methods: {
-    async get () {
-      const res = await api.intro()
-      this.img = res.data.img
-      this.name = res.data.name
-      this.intro = res.data.intro
-      this.github = res.data.github
-    }
-  },
-  async created () {
-    this.get()
+  computed: {
+    ...mapState(['infor'])
   }
 }
 </script>
