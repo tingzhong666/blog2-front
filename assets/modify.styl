@@ -1,0 +1,56 @@
+// 第三方组件 样式修改
+#layout
+  // ===== element 分页组件 样式修改
+  // 选中时
+  .el-pagination.is-background .el-pager li:not(.disabled).active
+    background-color theme-c
+  // hover时
+  .el-pagination.is-background .el-pager li:not(.disabled):not(.active):hover
+    color theme-c
+  // 跳转到某页 输入框 聚焦时
+  .el-pagination__editor.el-input .el-input__inner:focus
+    border-color theme-c
+
+  // ====== 单选框组件
+  // 选择圆圈 鼠标移入时
+  .el-radio__inner:hover
+    border-color theme-c
+  // 选择圆圈 聚焦时  长是因为增加权重 element组件里也很长
+  .el-radio:focus:not(.is-focus):not(:active):not(.is-disabled) .el-radio__inner
+    box-shadow 0 0 2px 2px theme-c
+  // 选中时
+  .is-checked
+    // 选择圆圈
+    .el-radio__inner
+      border-color theme-c
+      background theme-c
+    // 描述文字
+    .el-radio__label
+      color theme-c
+      font-weight 600
+
+// 动态创建
+html
+  // ====== 日期选择组件
+  // 每月天数显示
+  .el-date-table
+    // 选中时
+    td.current:not(.disabled) span
+      background-color theme-c
+    // 今天
+    td.today span
+     color theme-c
+     font-weight 600
+    // hover时
+    td.available:hover
+      color form-color-h
+  // 年月 切换按钮 hover 时
+  .el-picker-panel__icon-btn:hover
+  .el-date-picker__header-label:hover
+  // 年
+  .el-year-table td.today .cell
+  .el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell
+  // 月
+  .el-month-table td.today .cell
+  .el-month-table td .cell:hover
+    color form-color-h

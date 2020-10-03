@@ -19,7 +19,7 @@ import scroll from '@/mixins/scroll'
 export default {
   computed: {
     active () {
-      return this.$store.state.scrollTop >= this.item.top && this.$store.state.scrollTop <= this.item.end
+      return this.$store.state.scrollTop >= this.item.top - 1 && this.$store.state.scrollTop < this.item.end - 1
     }
   },
   name: 'render',

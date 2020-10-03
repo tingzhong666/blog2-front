@@ -28,10 +28,12 @@ export default {
   position relative
   padding 0
   line-height 22px
-  font-size 10px
-  margin-left 22px
+  height 22px
+  font-size 12px
   transition opacity anima-time ease
   .content
+    line-height 22px
+    height 22px
     display inline-block
     background-color theme-c
     color theme-contrary
@@ -39,7 +41,7 @@ export default {
     border-radius 0 3px 3px 0
     .iconfont
       color theme-contrary
-      font-size 10px
+      font-size 12px
   &::before
     content ''
     position absolute

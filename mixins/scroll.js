@@ -16,9 +16,9 @@ export default {
   },
   methods: {
     mixinScrollCome (target) {
-      this.mixinScrollTarget = target
-
       if (this.$store.state.scrolling) return
+
+      this.mixinScrollTarget = target
 
       this.mixinScrollComeTopId = window.setInterval(() => {
         this.$store.commit('setScrolling', true)
@@ -27,6 +27,7 @@ export default {
   
         if (distance < 10) {
           document.documentElement.scrollTop = target
+          if (this.mixinScrollComeTopId && distance < 1) this.mixinScrollClear()
           return
         }
 
@@ -41,12 +42,14 @@ export default {
         const distance = Math.abs(top - this.mixinScrollTarget)
 
         // 定时器清除
-        if (this.mixinScrollComeTopId && distance < 1) {
-          window.clearInterval(this.mixinScrollComeTopId)
-          this.mixinScrollComeTopId = null
-          this.$store.commit('setScrolling', false)
-      }
+        if (this.mixinScrollComeTopId && distance < 1) this.mixinScrollClear()
       }, false)
+    },
+    // 定时器清除
+    mixinScrollClear () {
+      window.clearInterval(this.mixinScrollComeTopId)
+      this.mixinScrollComeTopId = null
+      this.$store.commit('setScrolling', false)
     }
   },
   async created () {

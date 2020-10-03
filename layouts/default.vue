@@ -120,9 +120,7 @@ export default {
           line-height header-h
         .content
           background-color bgc
-          --header-h header-h
-          --footer-h footer-h
-          min-height calc(100vh - var(--header-h) - var(--footer-h))
+          min-height 100vh
         .footer
           height footer-h
     .fixed

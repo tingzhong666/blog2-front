@@ -24,8 +24,8 @@
       </div>
 
       <!-- 标签 -->
-      <div class="item">
-        <Tag v-for="e in v.tag" :key="e.id" :id="e.id" :name="e.name"/>
+      <div class="item tags">
+        <Tag v-for="e in v.tag" :key="e.id" :id="e.id" :name="e.name" class="tag"/>
       </div>
 
       <!-- 简介 -->
@@ -126,6 +126,9 @@ export default {
           left 0
         &::selection
           background-color theme-contrary
+    .tags
+      .tag
+        margin-left 22px
     .intro
       padding 10px
       color index-intro

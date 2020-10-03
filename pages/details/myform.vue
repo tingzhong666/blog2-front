@@ -87,8 +87,10 @@ export default {
   input
     margin-bottom 10px
     height 2.5rem
+    min-height 30px
   textarea
     height 6rem
+    min-height 52px
   .submit
     overflow hidden
     .btn

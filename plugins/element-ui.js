@@ -12,7 +12,7 @@ import {
 //   MenuItemGroup,
 //   Input,
 //   InputNumber,
-//   Radio,
+  Radio,
 //   RadioGroup,
 //   RadioButton,
 //   Checkbox,
@@ -26,7 +26,7 @@ import {
 //   ButtonGroup,
 //   Table,
 //   TableColumn,
-//   DatePicker,
+  DatePicker,
 //   TimeSelect,
 //   TimePicker,
 //   Popover,
@@ -91,7 +91,7 @@ Vue.use(Pagination)
 // Vue.use(MenuItemGroup)
 // Vue.use(Input)
 // Vue.use(InputNumber)
-// Vue.use(Radio)
+Vue.use(Radio)
 // Vue.use(RadioGroup)
 // Vue.use(RadioButton)
 // Vue.use(Checkbox)
@@ -105,7 +105,7 @@ Vue.use(Pagination)
 // Vue.use(ButtonGroup)
 // Vue.use(Table)
 // Vue.use(TableColumn)
-// Vue.use(DatePicker)
+Vue.use(DatePicker)
 // Vue.use(TimeSelect)
 // Vue.use(TimePicker)
 // Vue.use(Popover)
