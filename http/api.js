@@ -62,5 +62,9 @@ export default {
     async get ({ id, page = 1, limit = 10 }) {
       return await http.get('/comment', { params: { id, page, limit } })
     }
+  },
+  // 标签
+  async tag (name = null) {
+    return await http.get('/tag', { params: { name } })
   }
 }

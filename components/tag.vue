@@ -1,5 +1,5 @@
 <template>
-  <router-link class='component' :to="'#'">
+  <router-link class='component' :to="'/tag/' + id">
     <div class="content">
       <span class="iconfont icon-biaoqian"></span>
       <span class="text" v-text="name"></span>

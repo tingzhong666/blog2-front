@@ -41,14 +41,21 @@ export default {
       if (time === 0) time = Date.now()
 
       this.$router.push('/search?q=' + this.q + '&time=' + time)
+    },
+    timeInit () {
+      if ([-1, -2, -3, -4, -5, -6].includes(this.$route.query.time * 1)) this.radio = this.$route.query.time * 1
+      else {
+        if (this.$route.query.time === '' || this.$route.query.time === null || this.$route.query.time === undefined) {
+          this.radio = -1
+        } else {
+          this.radio = 0
+          this.date = this.$route.query.time * 1
+        }
+      }
     }
   },
   async created () {
-    if ([-1, -2, -3, -4, -5, -6].includes(this.$route.query.time * 1)) this.radio = this.$route.query.time * 1
-    else {
-      this.radio = 0
-      this.date = this.$route.query.time * 1
-    }
+    this.timeInit()
   }
 }
 </script>
