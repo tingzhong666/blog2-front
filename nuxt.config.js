@@ -1,5 +1,16 @@
+import fs from 'fs'
+import path from 'path'
 
 export default {
+  serverMiddleware: [
+    {
+      path: '/admin',
+      handler: function (req, res, next) {
+        const data = fs.readFileSync(path.join(__dirname, './static/admin/index.html'))
+        res.end(data)
+      }
+    }
+  ],
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
