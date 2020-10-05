@@ -2,6 +2,10 @@ import fs from 'fs'
 import path from 'path'
 
 export default {
+  server: {
+    port: 30004,
+    host: '0.0.0.0'
+  },
   serverMiddleware: [
     {
       path: '/admin',
